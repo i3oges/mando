@@ -1,8 +1,9 @@
 <?php
 
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\DetailsController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/api/star-wars-movies', function () {
-    return Inertia::render('home');
-})->name('base');
+Route::post('/star-wars-movies', [SearchController::class, 'search']);
+
+Route::get('/star-wars-details/{type}/{uid}', [DetailsController::class, 'get_details']);

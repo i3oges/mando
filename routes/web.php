@@ -6,3 +6,7 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('welcome');
 })->name('home');
+
+Route::get('/details/{type}/{uid}', function () {
+    return Inertia::render('welcome');
+})->name('home');

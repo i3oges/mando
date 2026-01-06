@@ -1,21 +1,15 @@
-import SearchForm from '@/components/SearchForm';
-import { Head } from '@inertiajs/react';
+import { Route, Routes } from 'react-router';
+import DetailsPage from './DetailsPage';
+import SearchPage from './SearchPage';
 
 export default function Welcome() {
     return (
-        <>
-            <Head title="Welcome">
-                <link rel="preconnect" href="https://fonts.bunny.net" />
-                <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
-            </Head>
-            <header className="h-16 w-full border-b-1">Welcome</header>
-            <div className="m-auto flex w-3/4 justify-center gap-2 pt-4">
-                <SearchForm />
-                <div className="w-full border-1 p-4">
-                    <div>Results</div>
-                    <div className="border-b-1" />
-                </div>
-            </div>
-        </>
+        <div>
+            <header className="h-16 w-full content-center border-b-1 text-center text-2xl font-bold dark:text-gray-100">SFStarter</header>
+            <Routes>
+                <Route path="/" element={<SearchPage />} />
+                <Route path="/details/:type/:uid" element={<DetailsPage />} />
+            </Routes>
+        </div>
     );
 }
