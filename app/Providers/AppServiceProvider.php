@@ -3,15 +3,30 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Interface\SwApi;
+use App\Interface\DetailsService;
+use App\Interface\SearchService;
+use App\Services\SwApiService;
+use App\Services\DetailsServiceImpl;
+use App\Services\SearchServiceImpl;
 
 class AppServiceProvider extends ServiceProvider
 {
+
+    // public $bindings = [
+    //     SearchService::class => SearchServiceImpl::class,
+    //     DetailsService::class => DetailsServiceImpl::class,
+    // ];
+
+    // public $singletons = [ 
+    //     SwApi::class => SwApiService::class,
+    // ];
     /**
      * Register any application services.
      */
     public function register(): void
     {
-        //
+
     }
 
     /**
@@ -19,6 +34,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->app->bind(SwApi::class, SwApiService::class);
+        $this->app->bind(SearchService::class, SearchServiceImpl::class);
+        $this->app->bind(DetailsService::class, DetailsServiceImpl::class);
     }
 }

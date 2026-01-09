@@ -10,3 +10,8 @@ Route::get('/', function () {
 Route::get('/details/{type}/{uid}', function () {
     return Inertia::render('welcome');
 })->name('home');
+
+
+Route::get('/stats', function () {
+    return Inertia::render('welcome');
+})->name('home');

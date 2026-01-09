@@ -6,12 +6,12 @@ import TestProviders from '../util/TestProvider';
 
 describe('SearchForm', () => {
     it('should render', () => {
-        render(<SearchForm />, { wrapper: TestProviders() });
+        render(<SearchForm />, { wrapper: TestProviders({ initialEntries: ['/'] }) });
         expect(screen.getByRole('button', { name: /search/i })).toBeVisible();
     });
 
     it('should enable submit button once form is filled', async () => {
-        render(<SearchForm />, { wrapper: TestProviders() });
+        render(<SearchForm />, { wrapper: TestProviders({ initialEntries: ['/'] }) });
         expect(screen.getByRole('button', { name: /search/i })).toBeDisabled();
         await userEvent.type(screen.getByRole('textbox'), 'Yoda');
 

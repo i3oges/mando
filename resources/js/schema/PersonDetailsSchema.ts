@@ -10,6 +10,7 @@ export const PersonDetailsSchema = z.object({
     films: z.array(z.string()),
     name: z.string(),
     uid: z.string(),
+    type: z.literal('people'),
 });
 
 export type PersonDetails = z.infer<typeof PersonDetailsSchema>;

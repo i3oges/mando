@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Http;
 
 class SearchControllerTest extends TestCase
 {
+    use RefreshDatabase;
     public function test_successful_people(): void
     {
         Http::fake([
@@ -67,7 +68,22 @@ class SearchControllerTest extends TestCase
             "searchType" => "stars",
         ]);
 
-        $response->assertStatus(400)->assertContent("Invalid search criteria");
+        
+        $response->assertStatus(422)->assertJson([
+            "message" => "The selected search type is invalid."
+        ]);
+    }
+
+    public function test_invalid_search_query(): void
+    {
+        $response = $this->postJson('/api/star-wars-movies', [
+            "searchQuery" => "way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters way too many characters ",
+            "searchType" => "films",
+        ]);
+
+        $response->assertStatus(422)->assertJson([
+            "message" => "The search query field must not be greater than 255 characters."
+        ]);
     }
 }
 

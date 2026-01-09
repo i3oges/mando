@@ -7,10 +7,13 @@ export default defineConfig({
     test: {
         globals: true,
         environment: 'jsdom',
-        setupFiles: 'setup.ts',
+        setupFiles: './tests/setup.ts',
+        coverage: {
+            exclude: ['**/actions/**', '**/routes/**', '**/wayfinder/**', '**/tests/**'],
+        },
     },
 
-    root: path.resolve(__dirname, './resources/js/tests'),
+    root: path.resolve(__dirname, './resources/js'),
 
     resolve: {
         alias: {

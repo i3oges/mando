@@ -1,22 +1,23 @@
 import { FilmDetailsSchema } from '@/schema/FilmDetailsSchema';
 import { PersonDetailsSchema } from '@/schema/PersonDetailsSchema';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import z from 'zod';
+
+const SwDetailsSchema = z.discriminatedUnion('type', [FilmDetailsSchema, PersonDetailsSchema]);
 
 const useSwDetails = ({ type, uid }: { type: string; uid: string }) => {
     return useSuspenseQuery({
         queryKey: ['details', type, uid],
         refetchOnWindowFocus: false,
-        queryFn: async ({ queryKey: [, type, uid] }) => {
-            const json = await fetch(`/api/star-wars-details/${type}/${uid}`).then((res) => res.json());
+        queryFn: async ({ queryKey: [, type, uid], signal }) => {
+            const json = await fetch(`/api/star-wars-details/${type}/${uid}`, { signal }).then((res) => res.json());
             try {
-                if (type === 'people') {
-                    return PersonDetailsSchema.parse(json);
-                }
-                return FilmDetailsSchema.parse(json);
+                return SwDetailsSchema.parse(json);
             } catch (e) {
                 console.error(e);
             }
         },
+        refetchOnMount: false,
     });
 };
 

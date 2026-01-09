@@ -13,18 +13,20 @@ use Illuminate\Queue\SerializesModels;
 class RequestMetricsGathered
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    private $start;
-    private $end;
-    private $uri;
+    public float $start;
+    public float $end;
+    public string $uri;
+    public float $elapsed;
 
     /**
      * Create a new event instance.
      */
-    public function __construct($start, $end, $uri)
+    public function __construct($start, $end, $uri, $elapsed)
     {
         $this->start = $start;
         $this->end = $end;
         $this->uri = $uri;
+        $this->elapsed = $elapsed;
     }
 
     /**

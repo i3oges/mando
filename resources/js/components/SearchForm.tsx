@@ -24,7 +24,11 @@ const SearchForm = () => {
 
     const { mutateAsync } = useMutation({
         mutationFn: async (data: SearchForm) => {
-            const json = await fetch('/api/star-wars-movies', { method: 'POST', body: JSON.stringify(data) }).then((res) => res.json());
+            const json = await fetch('/api/star-wars-movies', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: { 'Content-Type': 'application/json' },
+            }).then((res) => res.json());
             return SearchResultsSchema.parse(json);
         },
     });
@@ -36,7 +40,7 @@ const SearchForm = () => {
     });
 
     return (
-        <section className="flex h-min w-full flex-col gap-4 border-1 p-4 dark:border-white">
+        <section className="flex h-min w-full flex-col gap-4 rounded-xl border-1 p-4 shadow-md shadow-gray-700 dark:border-white">
             <header className="text-xl font-bold dark:text-gray-100">What are you searching for?</header>
             <div className="flex gap-2">
                 <input type="radio" {...register('searchType')} value="people" /> <span className="dark:text-gray-100">People</span>
@@ -50,7 +54,7 @@ const SearchForm = () => {
             />
             <button
                 disabled={!isValid}
-                className="w-full rounded-md border-1 border-green-600 bg-green-400 drop-shadow-md hover:drop-shadow-amber-400 disabled:border-gray-300 disabled:bg-gray-200 disabled:drop-shadow-none"
+                className="w-full rounded-md border-1 border-green-600 bg-green-500 shadow-md hover:bg-green-600 hover:shadow-lg disabled:border-gray-300 disabled:bg-gray-200 disabled:shadow-none [&:not(:disabled)]:cursor-pointer"
                 onClick={submit}
             >
                 Search

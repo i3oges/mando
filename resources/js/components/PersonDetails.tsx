@@ -1,4 +1,5 @@
 import useSwDetails from '@/hooks/UseSwDetails';
+import { useIsFetching } from '@tanstack/react-query';
 import { Suspense } from 'react';
 import { useParams } from 'react-router';
 import FilmLink from './FilmLink';
@@ -6,13 +7,14 @@ import FilmLink from './FilmLink';
 const PersonDetails = () => {
     const { uid } = useParams();
     const { data } = useSwDetails({ type: 'people', uid: uid ?? '' });
+    const loadCount = useIsFetching({ queryKey: ['details', 'film'], exact: false });
     if (!data || 'openingCrawl' in data) {
         return <></>;
     }
     return (
         <main className="m-auto flex w-3/4 justify-center gap-2 pt-4">
-            <div className="flex flex-col gap-2">
-                <div>{data.name}</div>
+            <section className="flex h-min w-full flex-col gap-4 rounded-xl border-1 p-4 shadow-md shadow-gray-700 dark:border-white dark:text-gray-100">
+                <h2 className="text-xl font-bold">{data.name}</h2>
                 <div className="border-b-1">Details</div>
                 <div className="grid grid-cols-2 gap-3">
                     <div>Birth Year:</div>
@@ -28,11 +30,11 @@ const PersonDetails = () => {
                     <div>Mass:</div>
                     <div>{data.mass}</div>
                 </div>
-            </div>
-            <div className="flex flex-col gap-2">
+            </section>
+            <section className="flex h-min w-full flex-col gap-4 rounded-xl border-1 p-4 shadow-md shadow-gray-700 dark:border-white dark:text-white">
                 <div className="border-b-1">Movies</div>
                 <div>
-                    <Suspense fallback="loading...">
+                    <Suspense fallback={`loading... (${loadCount} remaining)`}>
                         {data.films.map((film) => (
                             <div key={film}>
                                 <FilmLink filmUrl={film} />
@@ -40,7 +42,7 @@ const PersonDetails = () => {
                         ))}
                     </Suspense>
                 </div>
-            </div>
+            </section>
         </main>
     );
 };

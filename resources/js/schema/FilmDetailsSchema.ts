@@ -5,6 +5,7 @@ export const FilmDetailsSchema = z.object({
     title: z.string(),
     characters: z.array(z.string()),
     uid: z.string(),
+    type: z.literal('film'),
 });
 
 export type FilmDetails = z.infer<typeof FilmDetailsSchema>;
