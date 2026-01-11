@@ -46,5 +46,8 @@ jobs:
       - name: Build Assets
         run: npm run build
 
+      - name: Create Database
+        run: touch testing
+
       - name: Tests
         run: ./vendor/bin/phpunit

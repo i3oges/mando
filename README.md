@@ -16,7 +16,7 @@ run `docker compose` to setup the containers
 docker compose -f compose.dev.yaml up --build
 ```
 
-after a minute you'll see some `Fatal error:` messages in the log. That means you need to install the projects dependencies.
+after some setup you'll see some `Fatal error:` messages in the log. That means you need to install the projects dependencies.
 
 open another terminal and run the following commands
 
@@ -32,7 +32,7 @@ npm run build
 composer install
 ```
 
-then close that terminal, and restart the `docker composer` task
+then close that terminal, and cancel the `docker compose` task, then restart it.
 
 ```sh
 docker compose -f compose.dev.yaml up --build
