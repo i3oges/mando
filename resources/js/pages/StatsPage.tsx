@@ -2,7 +2,7 @@ import StatisticsSchema from '@/schema/StatisticsSchema';
 import { useQuery } from '@tanstack/react-query';
 
 const StatsPage = () => {
-    const { data } = useQuery({
+    const { data, isLoading } = useQuery({
         queryKey: ['stats'],
         queryFn: () =>
             fetch('/api/stats')
@@ -16,8 +16,16 @@ const StatsPage = () => {
                 }),
     });
 
+    if (isLoading) {
+        return <main className="m-auto flex w-3/4 justify-center gap-2 pt-4 dark:text-white">Loading...</main>;
+    }
+
     if (!data) {
-        return <></>;
+        return (
+            <main className="m-auto flex w-3/4 justify-center gap-2 pt-4 dark:text-white">
+                No statistics available at this time, please try again later.
+            </main>
+        );
     }
 
     return (
