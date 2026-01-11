@@ -10,7 +10,7 @@ class SwApiService implements SwApi {
   public function get_people_details(string $uid): mixed {
     $response = Http::get($this->base_url . 'people/' . $uid);
     if ($response->getStatusCode() >= 400) {
-      abort(404, 'person not found');
+      abort($response->getStatusCode(), 'error fetching person');
     }
     return $response->json()['result'];
   }
@@ -18,7 +18,7 @@ class SwApiService implements SwApi {
   public function get_film_details(string $uid): mixed {
     $response = Http::get($this->base_url . 'films/' . $uid);
     if ($response->getStatusCode() >= 400) {
-      abort(404, 'film not found');
+      abort($response->getStatusCode(), 'error fetching film');
     }
     return $response->json()['result'];
   }

@@ -9,6 +9,6 @@ class StatisticsController extends Controller
 {
     
     public function get_statistics(Request $request) {
-        return Statistics::firstOrFail()->get()->first();
+        return Statistics::firstOrNew();
     }
 }

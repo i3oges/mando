@@ -13,14 +13,6 @@ use App\Services\SearchServiceImpl;
 class AppServiceProvider extends ServiceProvider
 {
 
-    // public $bindings = [
-    //     SearchService::class => SearchServiceImpl::class,
-    //     DetailsService::class => DetailsServiceImpl::class,
-    // ];
-
-    // public $singletons = [ 
-    //     SwApi::class => SwApiService::class,
-    // ];
     /**
      * Register any application services.
      */

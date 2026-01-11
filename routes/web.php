@@ -9,9 +9,9 @@ Route::get('/', function () {
 
 Route::get('/details/{type}/{uid}', function () {
     return Inertia::render('welcome');
-})->name('home');
+})->name('details');
 
 
 Route::get('/stats', function () {
     return Inertia::render('welcome');
-})->name('home');
+})->name('stats');
