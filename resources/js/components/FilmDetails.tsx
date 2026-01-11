@@ -10,7 +10,6 @@ const FilmDetails = () => {
     const loadCount = useIsFetching({ queryKey: ['details', 'people'], exact: false });
 
     if (!data || 'birthYear' in data) {
-        console.log({ data });
         return <></>;
     }
     return (

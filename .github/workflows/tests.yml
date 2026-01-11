@@ -49,5 +49,8 @@ jobs:
       - name: Create Database
         run: touch testing
 
-      - name: Tests
+      - name: Backend Tests
         run: ./vendor/bin/phpunit
+
+      - name: Frontend Tests
+        run: npm run test:ci

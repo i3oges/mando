@@ -34,7 +34,6 @@ const SearchForm = () => {
     });
 
     const submit = handleSubmit(async (data) => {
-        console.log({ data });
         const results = await mutateAsync(data);
         updateResults(results);
     });
