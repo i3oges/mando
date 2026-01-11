@@ -7,4 +7,4 @@ use Illuminate\Support\Facades\Schedule;
 
 Schedule::call(function () {
     StartMetricsProcessing::dispatch();
-})->everyFiveSeconds();
+})->everyFiveMinutes();
